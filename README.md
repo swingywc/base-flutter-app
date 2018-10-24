@@ -7,7 +7,15 @@
 
 ## Getting Started
 
-Follow this link ([click here](https://flutter.io/setup-macos/)) to get flutter sdk and install it.
+1. Follow this link ([click here](https://flutter.io/setup-macos/)) to get flutter sdk and install it.
+2. Add following lines to your `.bashrc` or `.zshrc`:
+
+```
+  export ANDROID_SDK=$HOME/Library/Android/sdk
+  export PATH=$ANDROID_SDK/emulator:$ANDROID_SDK/tools:$PATH
+```
+
+3. Restart your terminal to make sure `$PATH` is enabled.
 
 ## Run Application
 
@@ -15,21 +23,15 @@ Follow this link ([click here](https://flutter.io/setup-macos/)) to get flutter 
 
 ### Commands
 
-`flutter run`
+#### Android emulator
 
-Build application to one target device(simulator). If there are more than one target device(simulator), will list all targets with its id.
+`emulator -list-avds`
 
-`flutter run -d all`
+List all possible Android emulators that you can call and its ID.
 
-Build application to all possible target devices(simluators)
+`emulator -avd <EMULATOR_ID> &`
 
-`flutter build ios`
-
-Build ipa file for iOS. (defaults to `--release`)
-
-`flutter build apk`
-
-Build apk file for Android. (defaults to `--release`)
+Turn on specified Android emulator by `ID`. If you have encountered crashed problem on emulator, quit emulator and use this command again with `-wipe-data` as parameter to get a clean emulator.
 
 
 ## Flutter

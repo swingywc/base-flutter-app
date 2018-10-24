@@ -11,15 +11,21 @@ if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
 }
 
-def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
-if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
+def versionProperties = new Properties()
+def versionPropertiesFile = rootProject.file('version.properties')
+if (versionPropertiesFile.exists()) {
+    versionPropertiesFile.withReader('UTF-8') { reader ->
+        versionProperties.load(reader)
+    }
 }
 
-def flutterVersionName = localProperties.getProperty('flutter.versionName')
-if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
-}
+def appVersionCode = versionProperties.getProperty('app.versionCode')
+if (appVersionCode == null) { appVersionCode = '1' }
+
+def appVersionName = versionProperties.getProperty('app.versionName')
+if (appVersionName == null) { appVersionName = '1.0' }
+
+/***** Start defining application *****/
 
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -33,12 +39,25 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.irebate.isaiahflutterapp"
+        applicationId "com.irebate.app"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionCode appVersionCode.toInteger()
+        versionName appVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions "flavor-type"
+
+    productFlavors {
+        development {
+            dimension "flavor-type"
+            applicationIdSuffix ".dev"
+        }
+
+        production {
+            dimension "flavor-type"
+        }
     }
 
     buildTypes {
