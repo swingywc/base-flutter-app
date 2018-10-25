@@ -1,0 +1,45 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+  printf "\033[0;31m Please define your target version name first! \033[0m"
+  echo ""; exit 0
+else
+  VERSION_NAME=${1}
+fi
+
+if [[ -z $2 ]]; then
+  VERSION_CODE=${VERSION_NAME//.}
+else
+  VERSION_CODE=${2}
+fi
+
+printf "\033[1;36mTarget bump version name is ${VERSION_NAME}.
+Target bump version code is ${VERSION_CODE}.\033[0m \n\r\n\r"
+
+bump_android_version() {
+  echo "Bumping android..."
+
+  VERSION_NAME=${1}
+  VERSION_CODE=${2}
+
+  VERSION_FILE=./android/version.properties
+
+  sed -i "" "s/app.versionCode=[0-9]*/app.versionCode=${VERSION_CODE}/" ${VERSION_FILE}
+
+  sed -i "" "s/app.versionName=*.*/app.versionName=${VERSION_NAME}/" ${VERSION_FILE}
+}
+
+# bump_ios_version() {
+#   echo "Bumping ios..."
+
+#   CFBundleShortVersionString=${1}
+#   CFBundleVersion=${2}
+
+#   PLIST_FILE=./ios/irebateapp/Info.plist
+
+#   /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${CFBundleShortVersionString}" ${PLIST_FILE}
+#   /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${CFBundleVersion}" ${PLIST_FILE}
+# }
+
+bump_android_version $VERSION_NAME $VERSION_CODE
+# bump_ios_version $1 $2
