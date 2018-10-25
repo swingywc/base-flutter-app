@@ -1,6 +1,0 @@
-{
-  "scripts": {
-    "bump": "./scripts/bump",
-    "build": "./scripts/build"
-  }
-}
