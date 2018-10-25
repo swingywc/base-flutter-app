@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ -z $config ]]; then
+  FLAVOR="production"
+elif [ "$config" = "development" ]; then
+  FLAVOR="development"
+else
+  printf "\033[0;31m Please use either development or production config for building! \033[0m"
+  echo ""; exit 0
+fi
+
+if [ "$1" = "android" ]; then
+  echo "Building android apk file with ${FLAVOR} config..."
+  flutter build apk --flavor ${FLAVOR}
+fi

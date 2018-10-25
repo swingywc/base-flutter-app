@@ -1,5 +1,6 @@
 {
   "scripts": {
-    "bump": "./scripts/bump"
+    "bump": "./scripts/bump",
+    "build": "./scripts/build"
   }
 }

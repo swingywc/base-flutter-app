@@ -33,6 +33,10 @@ List all possible Android emulators that you can call and its ID.
 
 Turn on specified Android emulator by `ID`. If you have encountered crashed problem on emulator, quit emulator and use this command again with `-wipe-data` as parameter to get a clean emulator.
 
+#### Building release
+
+`npm run build android`
+Build Android apk file. Add `config=development` to use development config. Default is `production`.
 
 ## Flutter
 For help getting started with Flutter, view our online
