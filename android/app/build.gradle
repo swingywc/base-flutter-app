@@ -11,19 +11,21 @@ if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
 }
 
+
 def versionProperties = new Properties()
 def versionPropertiesFile = rootProject.file('version.properties')
-if (versionPropertiesFile.exists()) {
-    versionPropertiesFile.withReader('UTF-8') { reader ->
-        versionProperties.load(reader)
-    }
-}
+versionProperties.load(new FileInputStream(versionPropertiesFile))
 
 def appVersionCode = versionProperties.getProperty('app.versionCode')
 if (appVersionCode == null) { appVersionCode = '1' }
-
 def appVersionName = versionProperties.getProperty('app.versionName')
 if (appVersionName == null) { appVersionName = '1.0' }
+
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 
 /***** Start defining application *****/
 
@@ -60,11 +62,18 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
 }
