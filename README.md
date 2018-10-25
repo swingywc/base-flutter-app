@@ -16,7 +16,14 @@ Getting Started
       export PATH=$ANDROID_SDK/emulator:$ANDROID_SDK/tools:$PATH
     ```
 
-3. Restart your terminal to make sure `$PATH` is enabled.
+3. Run following commands in your terminal:
+
+    ```
+      sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+      sudo xcodebuild -license
+    ```
+
+4. Restart your terminal to get latest resources and paths.
 
 Run Application
 ------
@@ -38,6 +45,8 @@ Run Application
 - #### iOS simulator
 
     `open -a Simulator`
+
+    Turn on iOS simulator.
 
 - #### Building release
 

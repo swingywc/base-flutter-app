@@ -29,17 +29,17 @@ bump_android_version() {
   sed -i "" "s/app.versionName=*.*/app.versionName=${VERSION_NAME}/" ${VERSION_FILE}
 }
 
-# bump_ios_version() {
-#   echo "Bumping ios..."
+bump_ios_version() {
+  echo "Bumping ios..."
 
-#   CFBundleShortVersionString=${1}
-#   CFBundleVersion=${2}
+  CFBundleShortVersionString=${1}
+  CFBundleVersion=${2}
 
-#   PLIST_FILE=./ios/irebateapp/Info.plist
+  PLIST_FILE=./ios/Runner/Info.plist
 
-#   /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${CFBundleShortVersionString}" ${PLIST_FILE}
-#   /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${CFBundleVersion}" ${PLIST_FILE}
-# }
+  /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${CFBundleShortVersionString}" ${PLIST_FILE}
+  /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${CFBundleVersion}" ${PLIST_FILE}
+}
 
 bump_android_version $VERSION_NAME $VERSION_CODE
-# bump_ios_version $1 $2
+bump_ios_version $VERSION_NAME $VERSION_CODE
