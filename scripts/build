@@ -9,7 +9,13 @@ else
   echo ""; exit 0
 fi
 
+flutter clean
+
 if [ "$1" = "android" ]; then
   echo "Building android apk file with ${FLAVOR} config..."
   flutter build apk --flavor ${FLAVOR}
+elif [ "$1" = "ios" ]; then
+  echo "Building iOS app file..."
+  flutter build ios --flavor ${FLAVOR}
+  printf "\033[1;36m Please open Xcode to continue publishing to app store! \033[0m";
 fi

@@ -50,7 +50,12 @@ Run Application
 
 - #### Building release
 
-    `npm run build android`
+    `./scripts/bump <VERSION_NAME>`
+
+    Bump both iOS and Android to specific version name and code. If you want different version code, add `<VERSION_CODE>` at last of this command.
+
+    `./scripts/build android`
+
     Build Android apk file. Add `config=development` to use development config. Default config is `production`.
 
 Flutter
